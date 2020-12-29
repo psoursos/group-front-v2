@@ -48,33 +48,16 @@ public class UsersServiceImpl implements UsersService {
           }
           return authorities;
       }
+
+    @Override
+    public void create(Users user) {
+       String firstPassword = user.getPasswd();
+        String encodedPassword = passwordEncoder.encode(firstPassword);
+        user.setPasswd(encodedPassword);
+        udao.save(user);
+    }
     
     
     
-//    @Override// this method will be used from DaoAuthenticationProvider in MyWebSecurityConfigurer  
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        MyUser myuser = udao.findByUsername(username);
-//       List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(myuser.getRoleList());
-//        User user = new User(myuser.getUsername(), myuser.getPasswd(), authorities );
-//        return user;
-//         
-//    }
-//    
-    /**
-     * 
-     * This method will Convert Objects of Type Role(our Enity) to Objects of type GrantedAuthority
-     * Why? Because User Object of SpringFramework needs it
-     * What does User Object needs? A Collection of GrantedAuthority Objects
-     * @param roloi The roles of MyUser entity from DB
-     * @return 
-     */
-//       
-//      private List<GrantedAuthority>  convertRolesToGrantedAuthorities(List<Role> roloi){
-//          List<GrantedAuthority> authorities = new  ArrayList(); // a list with GrantedAuthority
-//          for (Role roles : roloi) {
-//              SimpleGrantedAuthority  authority = new SimpleGrantedAuthority("ROLE_" + roles.getRname());
-//              authorities.add(authority);
-//          }
-//          return authorities;
-//      }
+
 }

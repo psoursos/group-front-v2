@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RolesDao  extends JpaRepository<Roles, Integer>{
     
+    
+
   
 }
