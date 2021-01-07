@@ -3,19 +3,24 @@ package emergon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration //pereixei configuration rithmiseis
 @EnableWebSecurity // enable webSecurity
-public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
+public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
     
     @Autowired
     private UserDetailsService userService;
@@ -47,8 +52,8 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .and().logout().permitAll()
                 .and().exceptionHandling().accessDeniedPage("/access-denied");
                 
-
     }
+    
 
         @Bean
         public  AuthenticationProvider authenticationProvider(){
@@ -60,5 +65,16 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         @Bean
         public PasswordEncoder passwordEncoder(){
             return new BCryptPasswordEncoder();
+        }
+        
+        @Bean
+        @Override
+        public LocalValidatorFactoryBean getValidator() {
+            LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+            ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+            messageSource.setBasename("messages");
+            messageSource.setDefaultEncoding("UTF-8");
+            bean.setValidationMessageSource(messageSource);
+            return bean;
         }
 }

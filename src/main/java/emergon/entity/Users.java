@@ -21,7 +21,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -43,35 +45,40 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByPasswd", query = "SELECT u FROM Users u WHERE u.passwd = :passwd")})
 public class Users implements Serializable {
 
+    @NotEmpty(message = "{NotEmpty.user.firstName}")
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+//    @Size(min = 1, max = 45)
     @Column(name = "first_name")
     private String firstName;
+    @NotEmpty(message = "{NotEmpty.user.lastName}")
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+//    @Size(min = 1, max = 45)
     @Column(name = "last_name")
     private String lastName;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @NotEmpty(message = "{NotEmpty.user.email}")
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+//    @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
+    @NotEmpty(message = "{NotEmpty.user.username}")
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+//    @Size(min = 1, max = 45)
     @Column(name = "username")
     private String username;
+    @NotEmpty(message = "{NotEmpty.user.passwd}")
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 68)
     @Column(name = "passwd")
     private String passwd;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
-    private List<Courses> coursesList;
+    
+    
     @OneToMany(mappedBy = "users")
     private List<Reviews> reviewsList;
 
@@ -86,6 +93,12 @@ public class Users implements Serializable {
             joinColumns = {@JoinColumn(name = "uid", referencedColumnName = "uid")}, 
             inverseJoinColumns = {@JoinColumn(name = "rid", referencedColumnName = "rid")})
     private List<Roles> rolesList;
+    
+    @ManyToMany
+    @JoinTable(name = "coursesperuser", 
+            joinColumns = {@JoinColumn(name = "uid", referencedColumnName = "uid")}, 
+            inverseJoinColumns = {@JoinColumn(name = "cid", referencedColumnName = "id")})
+    private List<Courses> coursesList;
 
     public Users() {
     }
