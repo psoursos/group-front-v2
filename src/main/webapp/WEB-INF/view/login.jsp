@@ -13,15 +13,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Login Page</title>
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     </head>
 
 
-   
+
     <style>
-       
+
         h1{
             background-color:rgb(240, 235, 240);
             text-align:center;
@@ -52,10 +52,10 @@
             right:70px;	
         }
 
-/*        form{
-            font-size: 20px;
-            text-align: center;
-        }*/
+        /*        form{
+                    font-size: 20px;
+                    text-align: center;
+                }*/
     </style>
     <body>
         <h1>e - kpaideush
@@ -70,43 +70,44 @@
         <br>
         <br>
         <br>
-<!--        <div align="center">-->
-             <div class="container my-3">
-            <div class="row">
-                <div class="col-md-8 mx-auto">
+        <!--        <div align="center">-->
+        <div class="container my-3">
+<div class="mb-3">
+<!--            <div class="row">-->
+                <div class="col-md-1 mx-auto">
                     <br/>
                     <label style="color: tomato">${message}</label>
                     <br/>
                     <form:form action="${pageContext.request.contextPath}/authenticate" method="POST" modelAttribute="user"  > 
-                        <div class="form-row">
-                            <div class="col-md-6 form-group">
+                        <!--<div class="form-row">-->
+                            <div class="col-md-1 form-group">
                                 <label>Username</label>
-                              <input type="text" placeholder="Username" name="username"><br>
+                                <input type="text" placeholder="Username" name="username"><br>
                             </div>
-                             <div class="col-md-6 form-group"> 
-                              <label>Password</label>
-                               <input type="password" placeholder="Password" name="password"><br>
-                            <br/>
-                        </div>
-                        <input type="submit" value="Login" class="btn btn-primary btn-block mt-3"/>
+                            <div class="col-md-1 form-group"> 
+                                <label>Password</label>
+                                <input type="password" placeholder="Password" name="password"><br>
+                                <br/>
+                            </div>
+                            <input type="submit" value="Login" class="btn btn-primary mb-3 btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" />
+<!--                        </div>-->
                     </div>
                 </div>
-            </div>
-                        <div align="center"> 
-             <a href="${pageContext.request.contextPath}/create">Don't have account? Sing up</a>  
-             </div>      
-       </form:form>
+                <div align="center"> 
+                    <a href="${pageContext.request.contextPath}/create">Don't have account? Sing up</a>  
+                </div>      
+            </form:form>
+        </div>
     </div>
-</div>
-<div align="center">   
-    <!--<h3>Please Login</h3>-->
-    <c:if test="${param.error!= null}" >
-        <strong>Credentials are not correct!!!</strong>
-    </c:if>
-    <c:if test="${param.logout!= null}" >
-        <strong>You logged out succesfully !!</strong>
-    </c:if>
-</div>
+    <div align="center">   
+        <!--<h3>Please Login</h3>-->
+        <c:if test="${param.error!= null}" >
+            <strong>Credentials are not correct!!!</strong>
+        </c:if>
+        <c:if test="${param.logout!= null}" >
+            <strong>You logged out succesfully !!</strong>
+        </c:if>
+    </div>
 
 
 
