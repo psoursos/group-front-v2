@@ -1,0 +1,64 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 18, 2021, 2:32:59 PM
+    Author     : petros
+*/
+
+ .sidebar {
+            /* min-width: 250px;*/
+            /*max-width: 80%;*/
+            min-height: 82vh;
+            background-color: rgb(146, 146, 146);
+        }
+
+        .main-container {
+            display: flex;
+            width: 100%;
+            align-items: stretch;
+
+        }
+
+        .main-content {
+            margin-right: 20px;
+            width: 100%
+
+        }
+
+        .video-section {
+            height:77vh;
+            width: 100%
+        }
+
+        .text-section {
+            height: 5vh;
+            width: 100%;
+        }
+
+        .components li button {
+
+
+            border: 1px solid grey;
+            /*text-align: center;*/
+            color: black;
+            /* White text */
+            border-radius: 5%;
+            box-shadow: 2px 3px black;
+            padding: 10px 24px;
+            /* Some padding */
+            cursor: pointer;
+            /* Pointer/hand icon */
+            width: 100%;
+            /* Set a width if needed */
+            display: block;
+            /* Make the buttons appear below each other */
+
+        }
+
+        .components li:hover {
+            background-color: darkgray;
+        }
+    

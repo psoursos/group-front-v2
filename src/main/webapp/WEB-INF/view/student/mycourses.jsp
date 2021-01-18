@@ -3,17 +3,17 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>JSP Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css"  href="css/styles.css"/>
+    <link rel="stylesheet" type="text/css"  href="../css/styles.css"/>
 </head>
-<body class="text-white">
-    <section class="container-fluid  h-100  text-white " >
 
+<body class="text-white">
+ <section class="container-fluid  h-100  text-white " >
         <nav class="row navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
                     aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,12 +24,12 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/student/mycourses">My courses </a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/student/mycourses">My courses <span
+                                class="sr-only">(current)</span></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/student">Store<span
-                                class="sr-only">(current)</span></a>  
+                        <a class="nav-link" href="${pageContext.request.contextPath}/student">Store</a>  
                         <!--/testPage-->
                     </li>
                     <!-- <li class="nav-item">
@@ -40,7 +40,6 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword"   required >
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search</button>
                 </form>
-                    
                 <div class="dropdown my-account ml-1">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -58,12 +57,13 @@
         <section class="row mt-2 text-white">
 
             <h1>Welcome <security:authentication property="principal.username"/> !</h1>
-        </section>
+       
 
         
-        <section class="row mt-2 text-white">
-        <h2>Buy a Course</h2>
-        
+         </section>
+            
+            <section class="row mt-2 text-white">
+            <h2>My Courses</h2>
         </section>
         <div class="buffer">
 
@@ -98,7 +98,7 @@
                     <!--First slide-->
                     <div class="carousel-item active">
 
-                        <c:forEach items="${courses}" var="cu" varStatus="status" begin="0" end="2">
+                        <c:forEach items="${userCourses}" var="cu" varStatus="status" begin="0" end="2">
 
                             <div class="card-container col-3" style="float:left" >
 
@@ -110,7 +110,7 @@
                                         <h5 class="card-title">${cu.title}</h5>
                                         <div class="card-text text-dark">${cu.description}.</div>
                                         <div class="card-btns row flex-column   mx-1 ">
-                                            <a class="btn btn-primary mt-auto p-2 align-self-end" href="${pageContext.request.contextPath}/student/find?id=${cu.id}">View course</a>
+                                            <a class="btn btn-primary mt-auto p-2 align-self-end" href="${pageContext.request.contextPath}/student/videos?courseId=${cu.id}">Continue learning</a>
 <!--                                                <a class="btn btn-primary " href="${pageContext.request.contextPath}/admin/delete?id=${cu.id}">Delete</a>-->
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@
                     </div>
 
 
-                    <c:forEach items="${courses}" var="cu" varStatus="status"  begin="3" >
+                    <c:forEach items="${userCourses}" var="cu" varStatus="status"  begin="3" >
                         <c:if test="${(status.index % 3) == 0}">
                             <div class="carousel-item ">
                             </c:if> 
@@ -135,7 +135,7 @@
                                         <h5 class="card-title">${cu.title}</h5>
                                         <div class="card-text text-dark">${cu.description}.</div>
                                         <div class="card-btns row flex-column   mx-1 ">
-                                            <a class="btn btn-primary mt-auto p-2 align-self-end" href="${pageContext.request.contextPath}/student/find?id=${cu.id}">View course</a>
+                                            <a class="btn btn-primary mt-auto p-2 align-self-end" href="${pageContext.request.contextPath}/student/videos?id=${cu.id}">Continue learning</a>
 <!--                                                <a class="btn btn-primary " href="${pageContext.request.contextPath}/admin/delete?id=${cu.id}">Delete</a>-->
                                         </div>
                                     </div>
@@ -145,10 +145,6 @@
                             </div>
                         </c:if> 
                     </c:forEach>
-                    
-                                        <div align="center">    
-                <label style="color: tomato">${noCourses}</label>
-            </div>  
 
 
 
@@ -181,3 +177,4 @@
     </script><div class="open_grepper_editor" title="Edit & Save To Grepper"></div>
 </body>
 </html>
+

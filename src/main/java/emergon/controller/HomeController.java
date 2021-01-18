@@ -45,18 +45,7 @@ public class HomeController {
     }
     
     
-//    @GetMapping
-//    public String homePage(@ModelAttribute("user") Users user){
-//        if("ADMIN".equals(user.getRolesList().get(0))) {
-//            return "adminHome";
-//        } else if("STUDENT".equals(user.getRolesList().get(0))) {
-//            return "studentHome";
-//        }else if("TEACHER".equals(user.getRolesList().get(0))) {
-//            return "teacherHome";
-//        } else {
-//            return "login";
-//        }  
-//    }
+
     
     @GetMapping("/create")
     public String showCreateUserPage(Model model){

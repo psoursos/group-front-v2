@@ -20,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -28,10 +29,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author admin
- */
+
 @Entity
 @Table(name = "users")
 @XmlRootElement
@@ -42,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName")
     , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
     , @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")
-    , @NamedQuery(name = "Users.findByPasswd", query = "SELECT u FROM Users u WHERE u.passwd = :passwd")})
+    , @NamedQuery(name = "Users.findByPasswd", query = "SELECT u FROM Users u WHERE u.passwd = :passwd")
+    })
 public class Users implements Serializable {
 
     @NotEmpty(message = "{NotEmpty.user.firstName}")
@@ -88,11 +87,13 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @Column(name = "uid")
     private Integer uid;
-    @ManyToMany
-    @JoinTable(name = "user_role", 
-            joinColumns = {@JoinColumn(name = "uid", referencedColumnName = "uid")}, 
-            inverseJoinColumns = {@JoinColumn(name = "rid", referencedColumnName = "rid")})
-    private List<Roles> rolesList;
+//    @ManyToMany
+//    @JoinTable(name = "user_role", 
+//            joinColumns = {@JoinColumn(name = "uid", referencedColumnName = "uid")}, 
+//            inverseJoinColumns = {@JoinColumn(name = "rid", referencedColumnName = "rid")})
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role", referencedColumnName = "rid")
+    private Roles role;
     
     @ManyToMany
     @JoinTable(name = "coursesperuser", 
@@ -142,12 +143,12 @@ public class Users implements Serializable {
 
 
     @XmlTransient
-    public List<Roles> getRolesList() {
-        return rolesList;
+    public Roles getRole() {
+        return role;
     }
 
-    public void setRolesList(List<Roles> rolesList) {
-        this.rolesList = rolesList;
+    public void setRole(Roles role) {
+        this.role = role;
     }
 
     @Override

@@ -15,40 +15,40 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create New User</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css"  href="css/styles.css"/>
 
     </head>
     <body>
 
-        <div class="container my-3 text-white">
+        <div class="container my-3">
             <div class="row">
                 <div class="col-md-8 mx-auto">
-                    <h2>Sign Up and Start Learning!</h2>
+                    <h2>Create new User!</h2>
                     <br/>
                     <label style="color: tomato">${message}</label>
                     <br/>
-                    <form:form action="${pageContext.request.contextPath}/create" method="POST"  modelAttribute="user"> 
+                    <form:form action="${pageContext.request.contextPath}/admin/createUser" method="POST"  modelAttribute="user"> 
                         <div class="form-row">
                             <div class="col-md-6 form-group">
                                 <label>First Name</label>
-                                <form:input type="text" path="firstName" class="form-control" placeholder="First Name"/>
+                                <form:input path="firstName" class="form-control" placeholder="First Name"/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Last Name</label>
-                                <form:input type="text" path="lastName" class="form-control" placeholder="Last Name"/>
+                                <form:input path="lastName" class="form-control" placeholder="Last Name"/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Email</label>
-                                <form:input type="email"  path="email" class="form-control" placeholder="Email Address"/>
+                                <form:input path="email" class="form-control" placeholder="Email Address"/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Username</label>
-                                <form:input type="text" path="username" class="form-control" placeholder="Username"/>
+                                <form:input path="username" class="form-control" placeholder="Username"/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Password</label>
-                                <form:input type="password" path="passwd" class="form-control" placeholder="Password"/>
+                                <form:input path="passwd" class="form-control" placeholder="Password"/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Role</label>
@@ -56,17 +56,25 @@
                             </div>
 
                             <br/>
+                            <!--<form:input path="passwd" placeholder="Confirm Password"/>
+                          <br/>-->
 
+                            <br/>
+                            <div class="col-md-3 form-group">
+                                <input type="submit" value="Save" class="btn btn-primary btn-block mt-3"/>
+                            </form:form>
                         </div>
 
-                        <div class="col-md-12 form-group">  
-                            <input type="submit" value="Save" class="btn btn-primary btn-block mt-3"/>
-                        </div>
-                    </form:form>
-                    <div class="col-md-12 form-group">
-                        <form:form action="${pageContext.request.contextPath}/loginPage" method="get">
-                            <input type="submit" value="Cancel" class="btn btn-danger btn-block mt-3"/>
+                    <div class="col-md-3 form-group">
+                        <form:form action="${pageContext.request.contextPath}/admin" method="get">
+                            <input type="submit" value="Cancel" class="btn btn-primary btn-block mt-3"/>
                         </form:form>
                     </div>
-                    </body>
-                    </html>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

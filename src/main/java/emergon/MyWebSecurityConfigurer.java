@@ -38,11 +38,21 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter implem
 
     @Override //this method add rules in the users - se poies seildes tha mporoune na mpoune oi users kai se poies oxi
     protected void configure(HttpSecurity http) throws Exception {
+            String[] staticResources  =  {
+        "/static/**",        
+        "/css/**",
+        "/img/**",
+        "/fonts/**",
+        "/scripts/**",
+    };
         http.authorizeRequests() //Restrict access base on the HttpServletRequest -- look all the requests
-                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers(staticResources).permitAll()
+//                .antMatchers("/startup/").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/teacher/**").hasRole("TEACHER")
                 .antMatchers("/student/**").hasRole("STUDENT")
                 .antMatchers("/create").permitAll()
+                
                 .anyRequest().authenticated()//Any request to the application must be authenticated (logged in)
                 .and()//Return again the HttpSecurity Object to add more rules
                 .formLogin()//We will customize the login process

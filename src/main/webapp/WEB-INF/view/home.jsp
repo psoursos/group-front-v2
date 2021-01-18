@@ -9,16 +9,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Home Page</title>
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css"  href="css/styles.css"/>
     </head>
   
-    <body>
+    <body class="text-white">
         
         <security:authorize access="hasRole('ADMIN')">
             <div class="container my-3">
-                <h1>Welcome to Admin Home Page</h1>
+                <h1 class="text-white"style="z-index: 1">Welcome to Admin Home Page</h1>
                 <hr>
                 <div class="row">
                     <div class="col-md-8 mx-auto">

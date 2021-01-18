@@ -17,15 +17,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.Cascade;
+
 
 /**
  *
@@ -49,31 +57,37 @@ public class Courses implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+     @NotEmpty(message = "{NotEmpty.course.title}")
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "title")
     private String title;
+     @NotEmpty(message = "{NotEmpty.course.description}")
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 300)
     @Column(name = "description")
     private String description;
+     @NotEmpty(message = "{NotEmpty.course.stream}")
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "stream")
     private String stream;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+//    @Max(value=3000)  @Min(value=1)//if you know range of your decimal fields consider using these annotations to enforce field validation
+//    @Size(min = 100, message = "{Size.course.price}")  
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
+    @Positive(message = "{Positive.course.price}")
     private BigDecimal price;
-    @JoinColumns({
-        @JoinColumn(name = "user_id", referencedColumnName = "uid")
-        })
-    @ManyToOne(optional = false)
-    private Users users;
+    
+    @ManyToMany
+    @JoinTable(name = "coursesperuser", 
+ joinColumns = {@JoinColumn(name = "cid", referencedColumnName = "id")}, 
+            inverseJoinColumns = {@JoinColumn(name = "uid", referencedColumnName = "uid")})
+    private List<Users> users;
     @OneToMany(mappedBy = "courses")
     private List<Reviews> reviewsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "courses")
@@ -95,6 +109,7 @@ public class Courses implements Serializable {
         this.stream = stream;
         this.price = price;
     }
+    
 
     public Integer getId() {
         return id;
@@ -136,13 +151,13 @@ public class Courses implements Serializable {
         this.price = price;
     }
 
-    public Users getUsers() {
-        return users;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
+//    public Users getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Users users) {
+//        this.users = users;
+//    }
 
     @XmlTransient
     public List<Reviews> getReviewsList() {
@@ -190,6 +205,17 @@ public class Courses implements Serializable {
         }
         return true;
     }
+
+    public List<Users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<Users> users) {
+        this.users = users;
+    }
+    
+    
+    
 
     @Override
     public String toString() {
