@@ -1,0 +1,110 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 15, 2021, 12:45:45 AM
+    Author     : petros
+*/
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+        background: url(../img/bg.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+         
+        
+      
+}
+h1  {
+    
+    z-index:1; 
+    color: white;
+}
+
+h2 {
+    
+    z-index:1; 
+    color: white;
+}
+
+.btn-primary {
+    
+    border-color: rgb(52, 185, 172);
+    background-color: rgb(52, 185, 172);
+}
+.btn-primary:hover {
+
+    border-color: rgb(35, 124, 115);
+    background-color: rgb(35, 124, 115);
+    border-width: 4px;
+}
+.btn-primary:active {
+    border-color: rgb(35, 124, 115);
+    background-color: rgb(110, 187, 179);
+}
+
+
+.form-container {
+   background: rgb(194, 185, 185);
+   padding: 30px;
+   border-radius: 10px;
+   box-shadow: 0px 0px 15px black;
+   border: 1px solid black;	/* thickness and color of border */
+
+
+}
+
+.form-title {
+    font-weight: bold;
+}
+.err-message {
+    font-weight: bold;
+    color: red;
+}
+
+html::before {
+    content: '';
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+/* .main {
+    height: 100px;
+} */
+.controls-top{
+    height: 10%;
+    color: red;
+}
+
+card-container{
+/*    height: 700px;*/
+}
+
+
+.card {
+    height: 200px;
+}
+
+
+.card-body {
+    background-color: darkgray;
+    
+    
+}
+/*.card-text {
+    height: 100px;
+}*/
+.buffer {
+    height: 10%;
+} 
+.card-btns {
+ 
+}
